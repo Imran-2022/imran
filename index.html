@@ -807,9 +807,100 @@ footer.footer-simple {
   .section{padding:2rem 1rem;}
   .hero-header{padding:1.2rem 1rem 1rem;}
 }
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.popup-overlay[hidden] {
+  display: none !important;
+}
+
+.popup-modal {
+  width: min(420px, 100%);
+  background: rgba(22, 22, 29, 1);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.popup-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.popup-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 1.8rem;
+}
+
+.popup-btn {
+  padding: 0.85rem 1.8rem;
+  background: #bc1b1b !important;
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.popup-btn:hover { background: var(--accent2); transform: translateY(-2px); }
 </style>
 </head>
 <body>
+<div id="claude-popup" class="popup-overlay" hidden>
+  <div class="popup-modal">
+    <div class="popup-title">Hi there!</div>
+    <p class="popup-text">Created by Claude AI. Nothing code in hand.</p>
+    <button id="claude-popup-ok" class="popup-btn" type="button">OK</button>
+  </div>
+</div>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const countKey = 'claudePopupClickCount';
+  const resetKey = 'claudePopupResetTime';
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+  const now = Date.now();
+
+  let resetTime = Number(localStorage.getItem(resetKey) || '0');
+  if (!resetTime || now >= resetTime) {
+    localStorage.setItem(countKey, '0');
+    resetTime = now + ONE_DAY_MS;
+    localStorage.setItem(resetKey, String(resetTime));
+  }
+
+  let clickCount = Number(localStorage.getItem(countKey) || '0');
+  const overlay = document.getElementById('claude-popup');
+  const okButton = document.getElementById('claude-popup-ok');
+
+  if (clickCount < 3) {
+    overlay.hidden = false;
+  }
+
+  okButton.addEventListener('click', () => {
+    overlay.hidden = true;
+    if (clickCount < 3) {
+      clickCount += 1;
+      localStorage.setItem(countKey, String(clickCount));
+    }
+  });
+});
+</script>
 
 <!-- HERO HEADER -->
 <div class="hero-header">
