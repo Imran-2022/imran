@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Md Imranul Haque — Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #0c0c0f;
+  --bg2:      #111116;
+  --surface:  #16161d;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --text:     #e8e6e0;
+  --muted:    #7a7870;
+  --accent:   #c9a96e;
+  --accent2:  #e8c98a;
+  --red:      #c0392b;
+  --white:    #f5f4f0;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.6;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 6rem 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -20%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(201,169,110,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.hero-label::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 0.3rem;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-role {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 1px;
+  margin: 1.5rem 0 2.5rem;
+  line-height: 1.7;
+  max-width: 420px;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.btn-primary {
+  padding: 0.75rem 2rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.btn-primary:hover { background: var(--accent2); }
+.btn-ghost {
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Hero right column */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+.hero-stat-row {
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.3s;
+}
+.hero-stat-row:hover { border-color: var(--border2); }
+.hs-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hs-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.skill-item {
+  background: var(--bg);
+  padding: 2rem 1.8rem;
+  position: relative;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.4s ease;
+}
+.skill-item:hover { background: var(--surface); }
+.skill-item:hover::before { height: 100%; }
+.skill-cat {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.skill-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 400;
+  line-height: 2;
+}
+.skill-name span {
+  display: inline-block;
+  padding: 0 0;
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* ── EXPERIENCE ── */
+.exp-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.exp-item:first-child { padding-top: 0; }
+.exp-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.exp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  border: 1px solid rgba(201,169,110,0.3);
+  padding: 0.25rem 0.6rem;
+  margin-top: 0.5rem;
+}
+.exp-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:0.4; transform:scale(0.7); }
+}
+.exp-company {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+}
+.exp-title-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.exp-bullets { list-style: none; }
+.exp-bullets li {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: color 0.2s;
+}
+.exp-bullets li:hover { color: var(--text); }
+.exp-bullets li::before {
+  content: '—';
+  color: var(--accent);
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  margin-top: 0.1rem;
+}
+
+/* ── COMPETITIVE PROGRAMMING ── */
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 2rem;
+}
+.cp-card {
+  background: var(--bg);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.cp-card:hover { background: var(--surface); }
+.cp-platform {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.cp-rating {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.cp-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  line-height: 2;
+}
+.cp-sub strong { color: var(--text); font-weight: 500; }
+.cp-tag {
+  margin-top: 1rem;
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(201,169,110,0.25);
+  padding-top: 0.8rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+/* CP total bar */
+.cp-total {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.8rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.cp-total-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.cp-total-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--white);
+}
+.cp-total-num span { color: var(--accent); }
+.cp-total-note {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  color: var(--muted);
+  max-width: 350px;
+  line-height: 1.6;
+}
+
+/* ── PROJECTS ── */
+.proj-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+.proj-item {
+  background: var(--bg);
+  padding: 2.5rem 2.5rem;
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.proj-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s;
+}
+.proj-item:hover { background: var(--surface); }
+.proj-item:hover::after { transform: scaleX(1); }
+.proj-num-col {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: rgba(201,169,110,0.2);
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+.proj-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.3px;
+}
+.proj-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 600px;
+  margin-bottom: 1rem;
+}
+.proj-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.proj-tag-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  padding: 0.2rem 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.proj-tag-item:hover { border-color: var(--accent); color: var(--accent); }
+.proj-link-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.3rem;
+}
+.proj-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.proj-link:hover { color: var(--accent); }
+.proj-link::after { content: '→'; font-size: 0.8rem; }
+
+/* ── EDUCATION ── */
+.edu-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.edu-main {
+  background: var(--surface);
+  padding: 3rem;
+}
+.edu-uni {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem,2.5vw,1.8rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+.edu-degree {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.edu-cgpa-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.edu-cgpa {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+}
+.edu-graph {
+  margin-top: 2.5rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.edu-graph img {
+  width: 100%;
+  display: block;
+}
+.edu-cgpa-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+}
+.edu-side {
+  background: var(--bg);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.edu-detail-item { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.edu-detail-item:first-child { padding-top: 0; }
+.edu-detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.edu-detail-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.contact-left {
+  background: var(--surface);
+  padding: 3.5rem;
+}
+.contact-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+.contact-intro em { font-style: italic; color: var(--accent); }
+.contact-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 360px;
+}
+.contact-right {
+  background: var(--bg);
+  padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.contact-link:hover .cl-label { color: var(--accent); }
+.contact-link:hover .cl-arrow { color: var(--accent); transform: translateX(4px); }
+.cl-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.cl-val {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 300;
+}
+.cl-arrow {
+  font-size: 0.9rem;
+  color: var(--border2);
+  transition: all 0.2s;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 4rem;
+}
+footer.footer-simple {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+.footer-col-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--accent2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.footer-col-content {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  color: var(--white);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.footer-col-content strong {
+  color: var(--accent2);
+  font-weight: 500;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+.footer-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── HORIZONTAL RULE ── */
+.hr { border: none; border-top: 1px solid var(--border); }
+
+/* ── HERO HEADER ── */
+.hero-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem 4rem 2rem;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-photo {
+  width: min(70vw, 280px);
+  height: min(70vw, 280px);
+  border-radius: 200px;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  box-shadow: 0 24px 80px rgba(201,169,110,0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.hero-header-info h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 4vw, 4.5rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.5px;
+}
+.hero-header-info p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 720px;
+}
+.hero-header-info em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── FADE IN ANIMATION ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.fade-up { opacity:0; animation: fadeUp 0.7s ease forwards; }
+.fade-up:nth-child(1){ animation-delay:0.1s; }
+.fade-up:nth-child(2){ animation-delay:0.2s; }
+.fade-up:nth-child(3){ animation-delay:0.3s; }
+.fade-up:nth-child(4){ animation-delay:0.4s; }
+.fade-up:nth-child(5){ animation-delay:0.5s; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-header{flex-direction:column;gap:1.5rem;padding:2rem 2rem 1rem;}
+  .hero-photo{width:min(55vw,220px);height:min(55vw,220px);}
+  .hero-header-info h1{font-size:clamp(2.6rem,6vw,3.6rem);}
+  .hero-header-info p{font-size:0.95rem;max-width:100%;}
+  .hero{grid-template-columns:1fr;padding:4rem 2rem 2rem;gap:3rem;}
+  .hero-right{align-items:flex-start;}
+  .hero-stat-row{max-width:100%;}
+  .section{padding:4rem 2rem;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .cp-grid{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;}
+  .proj-item{grid-template-columns:1fr;}
+  .proj-num-col{display:none;}
+  .proj-link-col{align-items:flex-start;}
+  .edu-block{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  footer{padding:2rem;}
+}
+@media(max-width:600px){
+  .hero-photo{width:min(70vw,180px);height:min(70vw,180px);}
+  .hero-header{padding:1.5rem 1.5rem 1rem;}
+  .hero-header-info h1{font-size:2.4rem;}
+  .hero-header-info p{font-size:0.95rem;line-height:1.7;}
+  .section{padding:3rem 1.5rem;}
+  .skills-grid{grid-template-columns:1fr;}
+  .proj-item{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;}
+  .edu-block{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  footer{padding:1.5rem;}
+}
+@media(max-width:450px){
+  body{font-size:0.95rem;}
+  .hero-header-info h1{font-size:2rem;}
+  .footer-name{font-size:0.95rem;}
+  .footer-note{font-size:0.55rem;}
+  .section{padding:2rem 1rem;}
+  .hero-header{padding:1.2rem 1rem 1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO HEADER -->
+<div class="hero-header">
+  <img src="imran.jpg" alt="Md Imranul Haque" class="hero-photo">
+  <div class="hero-header-info">
+    <h1>Md Imranul Haque</h1>
+    <p>Junior Software Engineer, Who building enterprise-grade systems with <em>.NET, Angular, and Clean Architecture</em> — currently at Wafi Solutions, Dhaka.</p>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Technical Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-name">
+          <span>C++</span> &nbsp;·&nbsp; <span>C#</span> &nbsp;·&nbsp; <span>JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Frontend</div>
+        <div class="skill-name">
+          <span>React</span> &nbsp;·&nbsp; <span>Redux</span><br/>
+          <span>Angular</span> &nbsp;·&nbsp; <span>Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Backend</div>
+        <div class="skill-name">
+          <span>ASP.NET Core</span> &nbsp;·&nbsp; <span>Node.js</span><br/>
+          <span>Express</span> &nbsp;·&nbsp; <span>EF Core</span>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Databases</div>
+        <div class="skill-name">
+          <span>SQL</span> &nbsp;·&nbsp; <span>PostgreSQL</span><br/>
+          <span>MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">Architecture</div>
+        <div class="skill-name">
+          <span>Clean Architecture</span><br/>
+          <span>Domain-Driven Design</span> &nbsp;·&nbsp; <span>ABP Framework</span>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-cat">DevOps &amp; Observability</div>
+        <div class="skill-name">
+          <span>Docker</span> &nbsp;·&nbsp; <span>Grafana-Prometheus</span><br/>
+          <span>CI/CD</span> &nbsp;·&nbsp; <span>Postman</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:var(--bg2);">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Work Experience</h2>
+    </div>
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-period">Nov 2025 — Present</div>
+        <div class="exp-badge">Active</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-company">Wafi Solutions</div>
+        <div class="exp-title-role">Junior Software Engineer</div>
+        <ul class="exp-bullets">
+          <li>Learned and implemented Clean Architecture and Domain-Driven Design across production enterprise systems.</li>
+          <li>Contributed to multiple enterprise projects built with ABP Framework, .NET, and Angular.</li>
+          <li>Developed backend services using ASP.NET Core Web API and Minimal APIs.</li>
+          <li>Managed data access, migrations, and relational database design with EF Core.</li>
+          <li>Built Angular frontends and integrated APIs via ABP-generated proxy layers.</li>
+          <li>Set up Docker containers and implemented observability with Grafana, Prometheus, and Loki.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-period">Nov 2024 — Jan 2025</div>
+        <div class="exp-badge">Remote</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-company">RedTilt Solutions Ltd</div>
+        <div class="exp-title-role">Junior Developer</div>
+        <ul class="exp-bullets">
+          <li>Developed full-stack features for enterprise applications using React and Node.js.</li>
+          <li>Built and maintained RESTful APIs with Express.js and MongoDB integration.</li>
+          <li>Implemented Redux state management for complex React applications.</li>
+          <li>Collaborated with cross-functional teams in a remote environment across UK and international timezones.</li>
+          <li>Debugged and optimized frontend performance, improving load times and user experience.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE PROGRAMMING -->
+<section id="competitive">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Problem Solving</h2>
+    </div>
+    <div class="cp-grid">
+      <div class="cp-card">
+        <div class="cp-platform">CodeChef</div>
+        <div class="cp-rating">1643</div>
+        <div class="cp-sub">
+          <strong>370+</strong> problems solved<br/>
+          <strong>26</strong> contests<br/>
+          imr_an
+        </div>
+        <div class="cp-tag">Max Rating</div>
+      </div>
+      <div class="cp-card">
+        <div class="cp-platform">Codeforces</div>
+        <div class="cp-rating">1292</div>
+        <div class="cp-sub">
+          <strong>660+</strong> problems solved<br/>
+          <strong>50</strong> contests<br/>
+          imr_an
+        </div>
+        <div class="cp-tag">Max Rating</div>
+      </div>
+      <div class="cp-card">
+        <div class="cp-platform">LeetCode</div>
+        <div class="cp-rating">1800</div>
+        <div class="cp-sub">
+          <strong>300+</strong> problems solved<br/>
+          <strong>07</strong> contests<br/>
+          imr_an
+        </div>
+        <div class="cp-tag">Max Rating</div>
+      </div>
+    </div>
+    <div class="cp-total" style="margin-top:1px;">
+      <div>
+        <div class="cp-total-label">Total Problems Solved</div>
+        <div class="cp-total-num">1,330 <span>+</span></div>
+      </div>
+      <div class="cp-total-note">
+        Consistent programming practice across CodeChef, Codeforces, and LeetCode — 83 contests entered in total.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg2);">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Projects</h2>
+    </div>
+    <div class="proj-list">
+
+      <div class="proj-item">
+        <div class="proj-num-col">01</div>
+        <div class="proj-body">
+          <div class="proj-title">Bus Ticket Reservation System</div>
+          <p class="proj-desc">A full-stack bus reservation platform built with .NET 9, Angular, EF Core, and PostgreSQL, following Clean Architecture and Domain-Driven Design principles. Features transaction-safe seat booking, dynamic seat plan rendering, bus search, and end-to-end frontend-backend integration with unit test coverage.</p>
+          <div class="proj-stack">
+            <span class="proj-tag-item">.NET 9</span>
+            <span class="proj-tag-item">Angular</span>
+            <span class="proj-tag-item">EF Core</span>
+            <span class="proj-tag-item">PostgreSQL</span>
+            <span class="proj-tag-item">Clean Architecture</span>
+            <span class="proj-tag-item">DDD</span>
+          </div>
+        </div>
+        <div class="proj-link-col">
+          <a class="proj-link" href="https://github.com/Imran-2022/BT-System" target="_blank">GitHub</a>
+        </div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-num-col">02</div>
+        <div class="proj-body">
+          <div class="proj-title">Tutor-Match</div>
+          <p class="proj-desc">A full-stack tuition management platform built with React and Django REST Framework. I implemented application tracking, tutor profile management, account verification, advanced filtering, and complete frontend-backend integration.</p>
+          <div class="proj-stack">
+            <span class="proj-tag-item">React</span>
+            <span class="proj-tag-item">Django REST</span>
+            <span class="proj-tag-item">Python</span>
+          </div>
+        </div>
+        <div class="proj-link-col">
+          <a class="proj-link" href="#" target="_blank">Live View</a>
+        </div>
+      </div>
+
+      <div class="proj-item">
+        <div class="proj-num-col">03</div>
+        <div class="proj-body">
+          <div class="proj-title">Team Management Platform</div>
+          <p class="proj-desc">A full-stack MERN team management application featuring authentication, role-based access control, team and task management, project tracking, search, and real-time progress updates using RTK Query.</p>
+          <div class="proj-stack">
+            <span class="proj-tag-item">React</span>
+            <span class="proj-tag-item">Redux</span>
+            <span class="proj-tag-item">RTK Query</span>
+            <span class="proj-tag-item">Node.js</span>
+            <span class="proj-tag-item">Express</span>
+            <span class="proj-tag-item">MongoDB</span>
+          </div>
+        </div>
+        <div class="proj-link-col">
+          <a class="proj-link" href="#" target="_blank">Live View</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-block">
+      <div class="edu-main">
+        <div class="edu-uni">Hajee Mohammad Danesh Science and Technology University</div>
+        <div class="edu-cgpa-label">CGPA</div>
+        <div class="edu-cgpa">3.262</div>
+        <div class="edu-graph">
+          <img src="result-graph.png" alt="Semester performance graph">
+        </div>
+      </div>
+      <div class="edu-side">
+        <div class="edu-detail-item">
+          <div class="edu-detail-label">Duration</div>
+          <div class="edu-detail-val">2020 — 2025</div>
+        </div>
+        <div class="edu-detail-item">
+          <div class="edu-detail-label">Degree</div>
+          <div class="edu-detail-val">Bachelor of Science</div>
+        </div>
+        <div class="edu-detail-item">
+          <div class="edu-detail-label">Major</div>
+          <div class="edu-detail-val">Computer Science &amp; Engineering</div>
+        </div>
+        <div class="edu-detail-item">
+          <div class="edu-detail-label">Final Year Average Performance</div>
+          <div class="edu-detail-val">3.74 — Top of personal trajectory</div>
+        </div>
+        <div class="edu-detail-item" style="border:none;">
+          <div class="edu-detail-label">University</div>
+          <div class="edu-detail-val">HSTU, Dinajpur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2);">
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p class="contact-intro">I'm open to<br/><em>new opportunities</em><br/>and collaborations.</p>
+        <p class="contact-note">Whether you have a role in mind, a project to discuss, or simply want to connect — I'd be happy to hear from you.</p>
+      </div>
+      <div class="contact-right">
+        <a class="contact-link" href="mailto:mdimranulhaque.hstu@gmail.com">
+          <div>
+            <div class="cl-label">Email</div>
+            <div class="cl-val">mdimranulhaque.hstu@gmail.com</div>
+          </div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/md-imranul-haque/" target="_blank">
+          <div>
+            <div class="cl-label">LinkedIn</div>
+            <div class="cl-val">md-imranul-haque</div>
+          </div>
+          <span class="cl-arrow">→</span>
+        </a>
+        <a class="contact-link" href="https://github.com/Imran-2022" target="_blank">
+          <div>
+            <div class="cl-label">GitHub</div>
+            <div class="cl-val">Imran-2022</div>
+          </div>
+          <span class="cl-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* Intersection observer fade-in for sections */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-item, .cp-card, .proj-item, .exp-item, .edu-main, .edu-side, .contact-left, .contact-right').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
